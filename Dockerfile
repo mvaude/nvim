@@ -60,6 +60,7 @@ RUN \
 	zsh=5.8.1-r4 \
   git=2.36.1-r0 \
   build-base=0.5-r2 \
+  ripgrep=13.0.0-r0 \
   clang-extra-tools=13.0.1-r1 \
 	&& python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
