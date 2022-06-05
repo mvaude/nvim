@@ -12,6 +12,14 @@ vim.api.nvim_create_autocmd(
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
+  use('nvim-lua/plenary.nvim')
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    -- run = ':TSUpdate',
+    config = function()
+      require('config.plugins.nvim-treesitter')
+    end,
+  })
   -- Theme
   use({
     'EdenEast/nightfox.nvim',
@@ -19,4 +27,12 @@ return require('packer').startup(function(use)
       require('config.plugins.nightfox')
     end,
   })
+
+  -- use {
+  --   "ThePrimeagen/refactoring.nvim",
+  --   requires = {
+  --       {"nvim-lua/plenary.nvim"},
+  --       {"nvim-treesitter/nvim-treesitter"}
+  --   }
+  -- }
 end)

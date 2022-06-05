@@ -59,6 +59,8 @@ RUN \
 	fzf=0.30.0-r2 \
 	zsh=5.8.1-r4 \
   git=2.36.1-r0 \
+  build-base=0.5-r2 \
+  clang-extra-tools=13.0.1-r1 \
 	&& python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
 	# create user
@@ -87,7 +89,10 @@ RUN \
   git clone --depth 1 https://github.com/wbthomason/packer.nvim \
   /root/.local/share/nvim/site/pack/packer/start/packer.nvim
 # TODO: find a nicer fix
-RUN nvim --headless -c 'PackerSync' -c 'sleep 5' -c q
+# RUN nvim --headless ':PackerSync' -c 'sleep 5' -c q
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
+  # https://github.com/nvim-treesitter/nvim-treesitter/issues/2900
+  && nvim --headless -c 'TSUpdateSync' -c 'sleep 20' -c 'qa'
 
 VOLUME "${WORKSPACE}"
 
