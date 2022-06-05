@@ -1,3 +1,12 @@
+if require('mv.first_load')() then
+  return
+end
+
+--Remap space as leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 --Set highlight on search
 vim.o.hlsearch = false
 
@@ -27,10 +36,7 @@ vim.o.termguicolors = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
---Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 --Set python environment
 vim.g.python3_host_prog = '/home/neovim/.local/share/venvs/python3_neovim'
+
+require('config.plugins')
