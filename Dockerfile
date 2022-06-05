@@ -62,6 +62,7 @@ RUN \
   build-base=0.5-r2 \
   ripgrep=13.0.0-r0 \
   clang-extra-tools=13.0.1-r1 \
+  fd=8.3.2-r0 \
 	&& python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
 	# create user
