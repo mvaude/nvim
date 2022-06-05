@@ -59,8 +59,8 @@ RUN \
   # su-exec=0.2-r1 \
 	# needed for neovim python3 support
   python3=3.10.4-r0 \
-	# needed for pipsi
-  # py3-virtualenv=20.14.1-r0 \
+	# needed for pip
+  py3-virtualenv=20.14.1-r0 \
   # fuzzing search
 	fzf=0.30.0-r2 \
 	# needed by fzf because the default shell does not support fzf
@@ -102,8 +102,9 @@ RUN \
 USER neovim
 
 RUN \
+  #mkdir -p ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
-	${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
+	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
 
 USER root
 
