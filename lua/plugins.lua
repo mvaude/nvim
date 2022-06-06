@@ -239,4 +239,47 @@ packer.startup(function(use)
   use({ 'tweekmonster/startuptime.vim' })
 
   use({ 'ggandor/lightspeed.nvim' })
+
+  use({ 'LudoPinelli/comment-box.nvim', config = get_config('comment-box') })
+
+  use({ 'rcarriga/nvim-notify', config = get_config('notify') })
+
+  use({ 'echasnovski/mini.nvim', branch = 'stable', config = get_config('mini') })
+
+  use({
+    'https://gitlab.com/yorickpeterse/nvim-window.git',
+    config = get_config('nvim-window'),
+  })
+
+  use({
+    'waylonwalker/Telegraph.nvim',
+    config = function()
+      require('telegraph').setup({})
+    end,
+  })
+
+  use({ 'rhysd/conflict-marker.vim' })
+
+  use({ 'edluffy/specs.nvim', config = get_config('specs') })
+
+  use({ 'mfussenegger/nvim-ts-hint-textobject' })
+
+  use({
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = get_config('alpha-nvim'),
+  })
+
+  use({
+    'SmiteshP/nvim-gps',
+    config = function()
+      require('nvim-gps').setup({})
+    end,
+  })
+  use({
+    'j-hui/fidget.nvim',
+    config = function()
+      require('fidget').setup({})
+    end,
+  })
 end)

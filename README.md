@@ -7,7 +7,7 @@ Continuous WIP for neovim configuration.
 ### Build
 
 ```sh
-docker build -t nvim:latest .
+docker build -t nvim:latest.
 ```
 
 ### Run

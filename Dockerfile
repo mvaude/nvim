@@ -68,6 +68,7 @@ RUN \
   zoxide=0.8.1-r0 \
   shellcheck=0.8.0-r0 \
   yarn=1.22.19-r0 \
+  openjdk17=17.0.3_p7-r2 \
 	&& python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
 	# create user
