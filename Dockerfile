@@ -133,4 +133,4 @@ RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
 
 VOLUME "${WORKSPACE}"
 
-ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "nvim"]
