@@ -107,7 +107,7 @@ RUN \
   # && curl -sLo go.tar.gz "https://go.dev/dl/go1.18.3.linux-amd64.tar.gz" \
   # && tar -C /usr/local/bin -xzf go.tar.gz \
   # && rm go.tar.gz \
-  && ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install --no-cache-dir pyright black pynvim yamllint \
+  && ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install --no-cache-dir pyright black yamllint \
   # && /usr/local/bin/go install golang.org/x/tools/cmd/goimports@latest \
   # && /usr/local/bin/go install mvdan.cc/gofumpt@latest \
   # && /usr/local/bin/go install golang.org/x/tools/gopls@latest \
@@ -139,7 +139,7 @@ VOLUME "${WORKSPACE}"
 
 ENV ENV="/root/.zshenv"
 
-RUN echo "export PATH=$PATH:/root/.local/lua-language-server/bin" >> "${ENV}"
+RUN echo "export PATH=$PATH:/root/.local/lua-language-server/bin:${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin" >> "${ENV}"
 
 WORKDIR "${WORKSPACE}"
 

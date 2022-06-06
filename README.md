@@ -1,5 +1,7 @@
 # Neovim configuration
 
+Continuous WIP for neovim configuration.
+
 ## Docker
 
 ### Build

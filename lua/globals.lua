@@ -1,5 +1,5 @@
 --Set python environment
-vim.g.python3_host_prog = '/home/neovim/.local/share/venvs/python3_neovim'
+vim.g.python3_host_prog = '/root/.local/share/venvs/python3_neovim/bin/python'
 
 -- enable filetypee.lua
 -- This feature is currently opt-in

@@ -170,6 +170,11 @@ packer.startup(function(use)
 
   use({ 'neovim/nvim-lspconfig', config = get_config('lsp') })
 
+  use({
+    'ray-x/lsp_signature.nvim',
+    config = get_config('lsp-signature'),
+  })
+
   use({ 'RRethy/vim-illuminate' })
 
   -- Theme
