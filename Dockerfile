@@ -63,6 +63,11 @@ RUN \
   ripgrep=13.0.0-r0 \
   clang-extra-tools=13.0.1-r1 \
   fd=8.3.2-r0 \
+  tree-sitter=0.20.6-r0 \
+  nodejs=16.15.0-r1 \
+  zoxide=0.8.1-r0 \
+  shellcheck=0.8.0-r0 \
+  yarn=1.22.19-r0 \
 	&& python3 -m venv ${ENV_DIR}/${NVIM_PROVIDER_PYLIB} \
 	&& ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install pynvim
 	# create user
@@ -89,7 +94,37 @@ COPY . /root/.config/nvim
 # Install plugins
 RUN \
   git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-  /root/.local/share/nvim/site/pack/packer/start/packer.nvim
+  /root/.local/share/nvim/site/pack/packer/start/packer.nvim \
+  && yarn global add \
+  prettier \
+  eslint \
+  bash-language-server \
+  dockerfile-language-server-nodejs \
+  yaml-language-server \
+  typescript \
+  typescript-language-server \
+  vscode-langservers-extracted \
+  # && curl -sLo go.tar.gz "https://go.dev/dl/go1.18.3.linux-amd64.tar.gz" \
+  # && tar -C /usr/local/bin -xzf go.tar.gz \
+  # && rm go.tar.gz \
+  && ${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin/pip install --no-cache-dir pyright black pynvim yamllint \
+  # && /usr/local/bin/go install golang.org/x/tools/cmd/goimports@latest \
+  # && /usr/local/bin/go install mvdan.cc/gofumpt@latest \
+  # && /usr/local/bin/go install golang.org/x/tools/gopls@latest \
+  && curl -sLo tf-ls.zip "https://releases.hashicorp.com/terraform-ls/0.27.0/terraform-ls_0.27.0_linux_amd64.zip" \
+  && unzip -d /usr/local/bin tf-ls.zip \
+  && rm tf-ls.zip \
+  && curl -sLo tf.zip "https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip" \
+  && unzip -d /usr/local/bin tf.zip \
+  && curl -sLo lua-lsp.tar.gz "https://github.com/sumneko/lua-language-server/releases/download/3.2.4/lua-language-server-3.2.4-linux-x64.tar.gz" \
+  #FIX: extracted very much stuff besides the executable
+  && tar -C /usr/local/bin/ -xzf lua-lsp.tar.gz \
+  && rm lua-lsp.tar.gz \
+  && rm tf.zip \
+  # rust runs in strange segmentation faults when building with amd64 even after increasing Docker memory limits. Stylua is only available as amd64 release
+  # && curl https://sh.rustup.rs -sSf | zsh -s -- -y; cargo install stylua; rustup self uninstall -y;
+  && curl -sLo stylua.zip "https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.1/stylua-linux.zip" && unzip -d /usr/local/bin stylua.zip && rm stylua.zip
+
 # TODO: find a nicer fix
 # RUN nvim --headless ':PackerSync' -c 'sleep 5' -c q
 RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \

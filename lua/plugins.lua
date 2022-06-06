@@ -66,10 +66,110 @@ packer.startup(function(use)
   })
 
   use({
+    'numToStr/Navigator.nvim',
+    config = get_config('navigator'),
+  })
+
+  use({
+    'nvim-lualine/lualine.nvim',
+    config = get_config('lualine'),
+    event = 'VimEnter',
+    requires = {
+      { 'kyazdani42/nvim-web-devicons', opt = true },
+      {
+        'SmiteshP/nvim-gps',
+        config = function()
+          require('nvim-gps').setup({})
+        end,
+      },
+    },
+  })
+
+  use({
+    'norcalli/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    config = get_config('colorizer'),
+  })
+
+  use({ 'windwp/nvim-autopairs', config = get_config('autopairs') })
+
+  use({
     'nvim-treesitter/nvim-treesitter',
     -- run = ':TSUpdate',
+    -- requires = 'nvim-treesitter/nvim-treesitter-textobjects',
     config = get_config('treesitter'),
   })
+
+  use('nvim-treesitter/nvim-treesitter-textobjects')
+
+  use({
+    'hrsh7th/nvim-cmp',
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'f3fora/cmp-spell', { 'hrsh7th/cmp-calc' }, { 'lukas-reineke/cmp-rg' } },
+      { 'onsails/lspkind-nvim', requires = { 'famiu/bufdelete.nvim' } },
+    },
+    config = get_config('cmp'),
+  })
+
+  use({ 'onsails/lspkind-nvim', requires = { 'famiu/bufdelete.nvim' } })
+
+  use({ 'rafamadriz/friendly-snippets' })
+  use({
+    'L3MON4D3/LuaSnip',
+    requires = 'saadparwaiz1/cmp_luasnip',
+    config = get_config('luasnip'),
+  })
+
+  -- requirement for Neogit
+  use({
+    'sindrets/diffview.nvim',
+    cmd = {
+      'DiffviewOpen',
+      'DiffviewClose',
+      'DiffviewToggleFiles',
+      'DiffviewFocusFiles',
+    },
+    config = get_config('diffview'),
+  })
+
+  use({
+    'TimUntersberger/neogit',
+    requires = { 'nvim-lua/plenary.nvim' },
+    cmd = 'Neogit',
+    config = get_config('neogit'),
+  })
+
+  use({ 'f-person/git-blame.nvim', config = get_config('git-blame') })
+
+  use({
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    event = 'BufReadPre',
+    config = get_config('gitsigns'),
+  })
+
+  use('p00f/nvim-ts-rainbow')
+
+  use({
+    'kevinhwang91/nvim-bqf',
+    requires = { { 'junegunn/fzf', module = 'nvim-bqf' }, config = get_config('nvim-bqf') },
+  })
+
+  use({
+    'akinsho/nvim-bufferline.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    event = 'BufReadPre',
+    config = get_config('bufferline'),
+  })
+
+  use('famiu/bufdelete.nvim')
+
+  use({ 'neovim/nvim-lspconfig', config = get_config('lsp') })
+
   -- Theme
   use({
     'EdenEast/nightfox.nvim',
