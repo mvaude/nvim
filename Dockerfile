@@ -139,7 +139,7 @@ VOLUME "${WORKSPACE}"
 
 ENV ENV="/root/.zshenv"
 
-RUN echo "export PATH=$PATH:/root/.local/lua-language-server/bin:${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin" >> "${ENV}"
+RUN echo "export PATH=:/root/.local/lua-language-server/bin:${ENV_DIR}/${NVIM_PROVIDER_PYLIB}/bin:${PATH}" >> "${ENV}"
 
 WORKDIR "${WORKSPACE}"
 

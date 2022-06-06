@@ -177,9 +177,66 @@ packer.startup(function(use)
 
   use({ 'RRethy/vim-illuminate' })
 
-  -- Theme
   use({
-    'EdenEast/nightfox.nvim',
-    config = get_config('nightfox'),
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    config = get_config('null-ls'),
   })
+
+  use({
+    'simrat39/symbols-outline.nvim',
+    cmd = { 'SymbolsOutline' },
+    config = get_config('symbols'),
+  })
+
+  use({
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
+    config = get_config('indent-blankline'),
+  })
+
+  use({
+    'akinsho/nvim-toggleterm.lua',
+    keys = { '<C-n>', '<leader>fl', '<leader>gt' },
+    config = get_config('toggleterm'),
+  })
+
+  use({
+    'folke/todo-comments.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = get_config('todo'),
+  })
+
+  use({ 'ahmedkhalf/project.nvim', config = get_config('project') })
+
+  use('ironhouzi/starlite-nvim')
+
+  use({ 'folke/which-key.nvim', config = get_config('which') })
+
+  use('junegunn/vim-easy-align') -- no lua alternative
+
+  use({ 'rhysd/vim-grammarous', cmd = 'GrammarousCheck' })
+
+  -- Theme
+  if settings.theme == 'nightfox' then
+    use({ 'EdenEast/nightfox.nvim', config = get_config('nightfox') })
+  elseif settings.theme == 'catppuccino' then
+    use({ 'catppuccin/nvim', as = 'catppuccin', config = get_config('catppuccin') })
+  else
+    use({ 'catppuccin/nvim', as = 'catppuccin', config = get_config('catppuccin') })
+  end
+
+  use({
+    'ThePrimeagen/harpoon',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = get_config('harpoon'),
+  })
+
+  use({ 'folke/zen-mode.nvim', cmd = 'ZenMode', config = get_config('zen-mode') })
+
+  use({ 'folke/twilight.nvim', config = get_config('twilight') })
+
+  use({ 'tweekmonster/startuptime.vim' })
+
+  use({ 'ggandor/lightspeed.nvim' })
 end)

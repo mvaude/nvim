@@ -24,9 +24,20 @@ require('nightfox').setup({
       search = false,
     },
     modules = { -- List of various plugins and additional options
-      -- ...
+      diagnostic = true,
+      gitsigns = true,
+      illuminate = true,
+      lightspeed = true,
+      native_lsp = true,
+      neogit = true,
+      nvimtree = true,
+      symbol_outline = true,
+      telescope = true,
+      treesitter = true,
+      tsrainbow = true,
+      whichkey = true,
     },
   },
 })
 
-vim.cmd('colorscheme nightfox')
+vim.cmd('colorscheme nordfox')
