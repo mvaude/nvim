@@ -116,11 +116,15 @@ RUN \
   && rm tf-ls.zip \
   && curl -sLo tf.zip "https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip" \
   && unzip -d /usr/local/bin tf.zip \
-  && curl -sLo lua-lsp.tar.gz "https://github.com/sumneko/lua-language-server/releases/download/3.2.4/lua-language-server-3.2.4-linux-x64.tar.gz" \
-  #FIX: extracted very much stuff besides the executable
-  && tar -C /usr/local/bin/ -xzf lua-lsp.tar.gz \
-  && rm lua-lsp.tar.gz \
   && rm tf.zip \
+  && cd /root/.local \
+  && git clone --recursive https://github.com/sumneko/lua-language-server \
+  && cd lua-language-server/3rd/luamake \
+  && apk add --no-cache bash ninja \
+  && ./compile/install.sh \
+  && cd ../.. \
+  && ./3rd/luamake/luamake rebuild \
+  #FIX: extracted very much stuff besides the executable
   # rust runs in strange segmentation faults when building with amd64 even after increasing Docker memory limits. Stylua is only available as amd64 release
   # && curl https://sh.rustup.rs -sSf | zsh -s -- -y; cargo install stylua; rustup self uninstall -y;
   && curl -sLo stylua.zip "https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.1/stylua-linux.zip" && unzip -d /usr/local/bin stylua.zip && rm stylua.zip
@@ -133,4 +137,10 @@ RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
 
 VOLUME "${WORKSPACE}"
 
-ENTRYPOINT ["/bin/sh", "-c", "nvim"]
+ENV ENV="/root/.zshenv"
+
+RUN echo "export PATH=$PATH:/root/.local/lua-language-server/bin" >> "${ENV}"
+
+WORKDIR "${WORKSPACE}"
+
+ENTRYPOINT ["/bin/zsh", "-c", "nvim"]

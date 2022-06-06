@@ -170,6 +170,8 @@ packer.startup(function(use)
 
   use({ 'neovim/nvim-lspconfig', config = get_config('lsp') })
 
+  use({ 'RRethy/vim-illuminate' })
+
   -- Theme
   use({
     'EdenEast/nightfox.nvim',
